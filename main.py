@@ -9,13 +9,13 @@ from math import sqrt
 BOARD_LIMIT = 281
 
 
-def collision(queue, head):
-    y_queue = queue.ycor()
-    x_queue = queue.xcor()
+def collision(tail, head):
+    y_tail = tail.ycor()
+    x_tail = tail.xcor()
     y_head = head.ycor()
     x_head = head.xcor()
 
-    distance = round(sqrt((x_head - x_queue) ** 2 + (y_head - y_queue) ** 2), 2)
+    distance = round(sqrt((x_head - x_tail) ** 2 + (y_head - y_tail) ** 2), 2)
 
     if distance < 10:
         return True
@@ -52,12 +52,12 @@ def launch_game(event):
             food.refresh()
             food_on_snake = True
             while food_on_snake:
-                compteur = 0
+                count = 0
                 for seg in snake.segments:
                     if abs(food.xcor() - seg.xcor()) < 11 and abs(food.ycor() - seg.ycor()) < 11:
                         food.refresh()
-                        compteur += 1
-                if compteur == 0:
+                        count += 1
+                if count == 0:
                     food_on_snake = False
 
             speed *= 0.97
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     screen.bgcolor('royal blue')
     screen.title("Snake")
 
-    # Empêche l'écran de se rafraichir tant qu'on ne lui dit pas explicitement avec update
+    # Prevent the screen from refreshing unless said explicitly with update()
     screen.tracer(0)
     screen.update()
 
