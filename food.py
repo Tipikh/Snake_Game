@@ -17,5 +17,3 @@ class Food(Turtle):
         self.goto(random.randrange(-280, 280, 20), random.randrange(-280, 280, 20))
 
 
-
-

@@ -30,18 +30,23 @@ def launch_game(event):
     global limit
     global score
 
+    # Initialise snake, limits, food and score
     snake = Snake()
     limit.hide_start()
     food = Food()
     score.restart()
 
+    # Key binding
     canvas.bind('<Up>', snake.go_up)
     canvas.bind('<Down>', snake.go_down)
     canvas.bind('<Left>', snake.go_left)
     canvas.bind('<Right>', snake.go_right)
+    
     game_is_on = True
-
+    
+    # Set initial speed
     speed = 0.15
+    
     while game_is_on:
 
         snake.move()
@@ -65,18 +70,22 @@ def launch_game(event):
             score.clear()
             score.write_score()
 
+        # Check if snake collide with board limits
         if snake.head.xcor() > BOARD_LIMIT or snake.head.xcor() < BOARD_LIMIT * -1 or \
                 snake.head.ycor() > BOARD_LIMIT or snake.head.ycor() < BOARD_LIMIT * -1:
             game_is_on = False
 
+        # Check if snake collide with himself
         for segment in snake.segments[1:]:
             if collision(segment, snake.head):
                 game_is_on = False
 
+        # Show game over screen 
         if not game_is_on:
             snake.hide_snake()
             food.hideturtle()
             score.game_over()
+            
         screen.update()
 
 
