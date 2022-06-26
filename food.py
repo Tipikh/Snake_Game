@@ -3,6 +3,14 @@ import random
 
 
 class Food(Turtle):
+    """
+    A class to manage the snake's food
+    
+    Methods
+    -------
+    refresh
+        Set the food in a random location
+    """
 
     def __init__(self):
         super().__init__()
@@ -14,6 +22,8 @@ class Food(Turtle):
         self.refresh()
 
     def refresh(self):
+        """ Set the food in a random location """
+
         self.goto(random.randrange(-280, 280, 20), random.randrange(-280, 280, 20))
 
 

@@ -3,6 +3,7 @@ from snake import Snake
 from scores import ScoreBoard
 from limits import Limits
 from food import Food
+from events import Events
 import time
 from math import sqrt
 
@@ -28,13 +29,17 @@ def launch_game(event):
     global screen
     global canvas
     global limit
+    global events
     global score
 
     # Initialise snake, limits, food and score
     snake = Snake()
-    limit.hide_start()
+    events.clear()
     food = Food()
-    score.restart()
+    # events.restart()
+    score.score = 0
+    score.clear()
+    score.write_score()
 
     # Key binding
     canvas.bind('<Up>', snake.go_up)
@@ -84,7 +89,7 @@ def launch_game(event):
         if not game_is_on:
             snake.hide_snake()
             food.hideturtle()
-            score.game_over()
+            events.game_over()
             
         screen.update()
 
@@ -100,10 +105,11 @@ if __name__ == '__main__':
     screen.tracer(0)
     screen.update()
 
+    events = Events()
     limit = Limits()
     limit.create_limits()
     score = ScoreBoard()
-    limit.start_game()
+    events.start_game()
 
     screen.listen()
     canvas = screen.getcanvas()
