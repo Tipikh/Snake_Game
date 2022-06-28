@@ -22,7 +22,7 @@ class ScoreBoard(Turtle):
     Methods
     -------
     write_score
-        Write the current score on the screen
+        Write the score on the screen
     """
     def __init__(self):
         super().__init__()
@@ -33,6 +33,8 @@ class ScoreBoard(Turtle):
         self.write_score()
 
     def write_score(self):
+        """ Write the score on screen """
+
         self.write(f"Score : {self.score}", align=ALIGNMENT, font=(FONT_NAME, FONT_SIZE, FONT_TYPE))
 
 
