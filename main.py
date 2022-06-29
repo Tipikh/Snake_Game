@@ -36,7 +36,6 @@ def launch_game(event):
     snake = Snake()
     events.clear()
     food = Food()
-    # events.restart()
     score.score = 0
     score.clear()
     score.write_score()
@@ -56,7 +55,7 @@ def launch_game(event):
 
         snake.move()
         time.sleep(speed)
-        snake.get_direction(snake.head.heading())
+        snake.set_direction(snake.head.heading())
         if snake.head.distance(food) < 1:
             snake.grow_up()
             food.refresh()
