@@ -3,7 +3,7 @@ from snake import Snake
 from scores import ScoreBoard
 from limits import Limits
 from food import Food
-from events import Events
+from start_over import StartOver
 import time
 from math import sqrt
 
@@ -11,6 +11,8 @@ BOARD_LIMIT = 281
 
 
 def collision(tail, head):
+    """ A function to check for collisions between head and tail """
+    
     y_tail = tail.ycor()
     x_tail = tail.xcor()
     y_head = head.ycor()
@@ -24,17 +26,17 @@ def collision(tail, head):
         return False
 
 
-def launch_game(event):
+def game(event):
 
     global screen
     global canvas
     global limit
-    global events
+    global start_over
     global score
 
     # Initialise snake, limits, food and score
     snake = Snake()
-    events.clear()
+    start_over.clear()
     food = Food()
     score.score = 0
     score.clear()
@@ -48,47 +50,62 @@ def launch_game(event):
     
     game_is_on = True
     
-    # Set initial speed
+    # Set initial speed (time between to snake moves)
     speed = 0.15
     
     while game_is_on:
 
         snake.move()
+        
+        # Set time to wait before next move
         time.sleep(speed)
+        
         snake.set_direction(snake.head.heading())
+        
+        # Check for collision between snake head and food
         if snake.head.distance(food) < 1:
             snake.grow_up()
             food.refresh()
             food_on_snake = True
+            
+            # This while loop ensures that the new generated food
+            # does not fall on snake's body 
             while food_on_snake:
                 count = 0
-                for seg in snake.segments:
-                    if abs(food.xcor() - seg.xcor()) < 11 and abs(food.ycor() - seg.ycor()) < 11:
+                for segment in snake.segments:
+                    if abs(food.xcor() - segment.xcor()) < 11 and \
+                        abs(food.ycor() - segment.ycor()) < 11:
+                            
                         food.refresh()
                         count += 1
                 if count == 0:
                     food_on_snake = False
 
+            # Increase speed and score
             speed *= 0.97
             score.score += 1
             score.clear()
             score.write_score()
 
         # Check if snake collide with board limits
-        if snake.head.xcor() > BOARD_LIMIT or snake.head.xcor() < BOARD_LIMIT * -1 or \
-                snake.head.ycor() > BOARD_LIMIT or snake.head.ycor() < BOARD_LIMIT * -1:
+        if snake.head.xcor() > BOARD_LIMIT or \
+            snake.head.xcor() < BOARD_LIMIT * -1 or \
+                snake.head.ycor() > BOARD_LIMIT or \
+                    snake.head.ycor() < BOARD_LIMIT * -1:
+                        
             game_is_on = False
 
         # Check if snake collide with himself
         for segment in snake.segments[1:]:
             if collision(segment, snake.head):
+                
                 game_is_on = False
 
         # Show game over screen 
         if not game_is_on:
             snake.hide_snake()
             food.hideturtle()
-            events.game_over()
+            start_over.game_over()
             
         screen.update()
 
@@ -104,15 +121,17 @@ if __name__ == '__main__':
     screen.tracer(0)
     screen.update()
 
-    events = Events()
+    start_over = StartOver()
     limit = Limits()
     limit.create_limits()
     score = ScoreBoard()
-    events.start_game()
+    start_over.start_game()
 
     screen.listen()
     canvas = screen.getcanvas()
-    canvas.bind('<Return>', launch_game)
+
+    # Execute "game" function when the user press Enter
+    canvas.bind('<Return>', game)
 
     screen.update()
     screen.exitonclick()

@@ -103,28 +103,27 @@ class Snake:
         self.head.forward(MOVEMENT_DISTANCE)
 
     def set_direction(self, direction):
-        """ Set the direction attribute of the snake """
+        """ Set the direction attribute of the snake
+        
+        
+         """
         self.direction = direction
 
-    def go_up(self, event):
-        if self.head.heading() != DOWN:
-            if self.direction != DOWN:
-                self.head.setheading(UP)
+    def go_up(self, event): 
+        if self.direction != DOWN:
+            self.head.setheading(UP)
 
     def go_down(self, event):
-        if self.head.heading() != UP:
-            if self.direction != UP:
-                self.head.setheading(DOWN)
+        if self.direction != UP:
+            self.head.setheading(DOWN)
 
     def go_left(self, event):
-        if self.head.heading() != RIGHT:
-            if self.direction != RIGHT:
-                self.head.setheading(LEFT)
+        if self.direction != RIGHT:
+            self.head.setheading(LEFT)
 
     def go_right(self, event):
-        if self.head.heading() != LEFT:
-            if self.direction != LEFT:
-                self.head.setheading(RIGHT)
+        if self.direction != LEFT:
+            self.head.setheading(RIGHT)
 
 
     def hide_snake(self):
