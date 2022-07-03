@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     screen = Screen()
     screen.setup(width=700, height=720)
-    screen.bgcolor('royal blue')
+    screen.bgcolor('#EEEEEE')
     screen.title("Snake")
 
     # Prevent the screen from refreshing unless said explicitly with update()

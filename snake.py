@@ -10,7 +10,7 @@ STARTING_POSITION = ((0, 0), (-20, 0), (-40, 0))
 
 class Snake:
     """
-    A class to show and manage the behavior of the snake
+    A class to show and manage the behavior of the snake.
     Children of the Turtle class
     
     The snake is composed of several segments. Each segment is an 
@@ -18,7 +18,7 @@ class Snake:
     Each segment is associated to a tuple that give the position of 
     that segment 
 
-    When the snake eat some food a new segment is added 
+    When the snake eat food a new segment is added 
 
     Attributes
     ----------
@@ -40,6 +40,15 @@ class Snake:
 
     add_segment
         create a new segment at the given position
+
+    grow_up
+        add a new segment to the snake
+
+    move
+        make the snake move forward 
+
+    set_direction
+        change the direction attribute 
     """
 
     def __init__(self):
@@ -69,7 +78,7 @@ class Snake:
 
         new_turtle = Turtle(shape='square')
         new_turtle.penup()
-        new_turtle.color('chocolate')
+        new_turtle.color('#393E46')
         new_turtle.goto(position)
         self.segments.append(new_turtle)
 
@@ -80,7 +89,8 @@ class Snake:
         self.add_segment(self.segments[-1].position())
 
     def move(self):
-        """ Make the snake move to the next position.
+        """ 
+        Make the snake move to the next position.
         
         The head is moving forward and then each segment goes 
         to the position of the previous segment. 
