@@ -1,8 +1,14 @@
 # Snake_Game
 A basic little snake game built with python's turtle module. 
 
-If you have installed python you can download the files and run "main.py".
+No depedencies needed, you only need a basic Python 3 installation
 
-If you don't have python installed or if you don't know what to do, you can simply download and launch the "snake.exe" file on your PC (Windows only). 
+### How to run the script
+``` bash
+$ python main.py
+```
 
-The snake.exe file was created using the "Pyinstaller" module on the python files. 
+Or just run the main.py file 
+
+
+Then follow the instructions on screen.

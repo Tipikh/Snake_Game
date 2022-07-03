@@ -1,5 +1,5 @@
-from turtle import Turtle
 
+from turtle import Turtle
 
 ALIGNMENT = "center"
 FONT_NAME = "Arial"
@@ -9,6 +9,21 @@ POSITION = (0, 310)
 
 
 class ScoreBoard(Turtle):
+    """
+    A class to manage the scores
+    Children of the Turtle class
+    
+    Attributes
+    ----------
+
+    score : int
+        current score 
+
+    Methods
+    -------
+    write_score
+        Write the score on the screen
+    """
     def __init__(self):
         super().__init__()
         self.shape("blank")
@@ -18,20 +33,8 @@ class ScoreBoard(Turtle):
         self.write_score()
 
     def write_score(self):
+        """ Write the score on screen """
+
         self.write(f"Score : {self.score}", align=ALIGNMENT, font=(FONT_NAME, FONT_SIZE, FONT_TYPE))
 
-    def game_over(self):
-        self.goto(0, 30)
-        self.write(f"GAME OVER", align=ALIGNMENT, font=(FONT_NAME, 25, 'bold'))
-        self.penup()
-        self.goto(0, -30)
-        self.write(f"Press 'Enter' to play again", align=ALIGNMENT, font=(FONT_NAME, 15, 'normal'))
-
-    def restart(self):
-        self.clear()
-        self.shape("blank")
-        self.penup()
-        self.goto(POSITION)
-        self.score = 0
-        self.write_score()
 
