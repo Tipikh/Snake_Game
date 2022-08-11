@@ -8,7 +8,4 @@ No depedencies needed, you only need a basic Python 3 installation
 $ python main.py
 ```
 
-Or just run the main.py file 
-
-
 Then follow the instructions on screen.
